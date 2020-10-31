@@ -1,24 +1,19 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'androidx.navigation.safeargs'
 apply from: "$project.rootDir/buildsystem/dependencies.gradle"
 
 android {
-
     def globalConfig = rootProject.ext
 
     compileSdkVersion 30
     buildToolsVersion "30.0.1"
 
     defaultConfig {
-        applicationId "com.zalesskyi.photogallery"
         minSdkVersion globalConfig.androidMinSdkVersion
         targetSdkVersion globalConfig.androidTargetSdkVersion
         compileSdkVersion globalConfig.androidCompileSdkVersion
-        versionCode 1
-        versionName "1.0"
     }
 
     buildTypes {
@@ -28,8 +23,6 @@ android {
         }
         debug {
             minifyEnabled false
-            applicationIdSuffix ".debug"
-            versionNameSuffix "-debug"
         }
     }
     compileOptions {
@@ -49,5 +42,5 @@ kotlin {
 
 dependencies {
 
-    presentationDependencies()
+    dataDependencies()
 }
