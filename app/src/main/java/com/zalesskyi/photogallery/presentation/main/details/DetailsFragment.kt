@@ -3,6 +3,7 @@ package com.zalesskyi.photogallery.presentation.main.details
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.navArgs
+import com.zalesskyi.domain.models.Photo
 import com.zalesskyi.photogallery.R
 import com.zalesskyi.photogallery.presentation.base.BaseFragment
 import com.zalesskyi.photogallery.presentation.main.MainViewModel
@@ -24,12 +25,14 @@ class DetailsFragment : BaseFragment<DetailsViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainViewModel.photosLiveData.value?.get(args.albumId)?.let { photos ->
-            vpDetail.adapter = CardStackAdapter(photos)
-            photos.indexOfFirst { it.url == args.photoUrl }
-                .takeIf { it != NO_POSITION }?.let {
-                    vpDetail.setCurrentItem(it, false)
-                }
-        }
+        mainViewModel.photosLiveData.value?.get(args.albumId)?.let(::initPager)
+    }
+
+    private fun initPager(photos: List<Photo>) {
+        vpDetail.adapter = CardStackAdapter(photos)
+        photos.indexOfFirst { it.url == args.photoUrl }
+            .takeIf { it != NO_POSITION }?.let {
+                vpDetail.setCurrentItem(it, false)
+            }
     }
 }

@@ -9,9 +9,13 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvAlbums"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:scrollbarAlwaysDrawHorizontalTrack="true"
+        android:layoutAnimation="@anim/layout_fall_down"
         app:spanCount="2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:listitem="@layout/item_skeleton_album"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
 

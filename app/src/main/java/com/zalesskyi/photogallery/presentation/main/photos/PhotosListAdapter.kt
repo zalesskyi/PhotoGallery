@@ -62,6 +62,7 @@ class PhotosAdapter(list: List<Parcelable>,
 
         fun bind(photo: Photo) {
             binding.item = photo
+            binding.ivPreview.transitionName = photo.url
             binding.root.setOnClickListener { onItemClick(photo) }
         }
     }
