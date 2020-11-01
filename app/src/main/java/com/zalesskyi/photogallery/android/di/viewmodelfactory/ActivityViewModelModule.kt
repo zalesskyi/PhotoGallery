@@ -7,7 +7,7 @@ import dagger.Module
 @Module
 abstract class ActivityViewModelModule {
     @Binds
-    abstract fun bindViewModelFactory(factory: StromeeViewModelFactory): ViewModelProvider.Factory
+    abstract fun bindViewModelFactory(factory: AppViewModelFactory): ViewModelProvider.Factory
 
 
 }
