@@ -11,6 +11,8 @@ ext {
 
     androidGradlePluginVersion = '4.1.0'
 
+    coroutinesVer = '1.3.9'
+
     // Android X
     androidxVersion = '1.1.0'
     constraintlayoutVersion = '2.0.0-beta4'
@@ -27,7 +29,7 @@ ext {
     rxKotlinVersion = '2.4.0'
 
     // Retrofit
-    retrofitVersion = '2.5.0'
+    retrofitVersion = '2.7.2'
     okhttp3Version = '3.12.1'
 
     //Java
@@ -150,9 +152,11 @@ ext.ui = dependencyGroup {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     kapt "androidx.lifecycle:lifecycle-compiler:2.2.0"
+    implementation "io.coil-kt:coil:$coilVersion"
     implementation 'com.hannesdorfmann:adapterdelegates4:4.1.1'
     implementation "com.facebook.shimmer:shimmer:0.5.0"
     implementation 'com.github.nitrico.lastadapter:lastadapter:2.3.0'
+    implementation 'com.yuyakaido.android:card-stack-view:2.3.4'
 }
 
 ext.coroutines = dependencyGroup {
@@ -165,6 +169,8 @@ ext.retrofit = dependencyGroup {
     implementation "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
     implementation "com.squareup.okhttp3:logging-interceptor:${okhttp3Version}"
     implementation "com.squareup.okhttp3:okhttp:${okhttp3Version}"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutinesVer}"
 }
 
 ext.dagger = dependencyGroup {

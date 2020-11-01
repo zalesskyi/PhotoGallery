@@ -6,7 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.zalesskyi.photogallery.R
 import com.zalesskyi.photogallery.navigation.AppNavProvider
-import com.zalesskyi.photogallery.presentation.BaseActivity
+import com.zalesskyi.photogallery.presentation.base.BaseActivity
 
 class MainActivity : BaseActivity<MainViewModel>(), AppNavProvider {
 

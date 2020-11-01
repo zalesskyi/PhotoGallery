@@ -2,11 +2,11 @@ package com.zalesskyi.data.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.zalesskyi.data.BuildConfig
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.CallAdapter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -39,12 +39,10 @@ class NetModule {
     @Singleton
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient,
-                        gson: Gson,
-                        factory: CallAdapter.Factory): Retrofit {
+                        gson: Gson): Retrofit {
         return Retrofit.Builder()
-                .baseUrl("")  // todo
+                .baseUrl(BuildConfig.HOST)
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(factory)
                 .client(okHttpClient)
                 .build()
     }

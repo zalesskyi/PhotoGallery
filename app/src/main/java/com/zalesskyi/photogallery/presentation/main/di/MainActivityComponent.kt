@@ -12,12 +12,20 @@ import com.zalesskyi.photogallery.navigation.Navigator
 import com.zalesskyi.photogallery.presentation.main.MainActivity
 import com.zalesskyi.photogallery.presentation.main.MainNavigator
 import com.zalesskyi.photogallery.presentation.main.MainNavigatorImpl
+import com.zalesskyi.photogallery.presentation.main.MainNavigatorImpl.Companion.APP_NAV_NAVIGATOR
 import com.zalesskyi.photogallery.presentation.main.MainViewModelImpl
+import com.zalesskyi.photogallery.presentation.main.details.DetailsFragment
+import com.zalesskyi.photogallery.presentation.main.details.di.DetailsFragmentComponent
+import com.zalesskyi.photogallery.presentation.main.gallery.GalleryFragment
+import com.zalesskyi.photogallery.presentation.main.gallery.di.GalleryFragmentComponent
+import com.zalesskyi.photogallery.presentation.main.photos.PhotosListFragment
+import com.zalesskyi.photogallery.presentation.main.photos.di.PhotosListFragmentComponent
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.Subcomponent
 import dagger.android.AndroidInjector
+import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
 import javax.inject.Named
 
@@ -44,13 +52,34 @@ interface MainActivityComponent : AndroidInjector<MainActivity> {
 
         @Binds
         fun provideActivityModule(activity: MainActivity): AppCompatActivity
+
+        @Binds
+        fun bindAppHostProvider(activity: MainActivity): AppNavProvider
     }
 
     @Module(
         subcomponents = [
+            (GalleryFragmentComponent::class),
+            (PhotosListFragmentComponent::class),
+            (DetailsFragmentComponent::class)
         ]
     )
-    abstract class FragmentBindingsModule
+    abstract class FragmentBindingsModule {
+        @Binds
+        @IntoMap
+        @ClassKey(value = GalleryFragment::class)
+        internal abstract fun bindGalleryFragment(factory: GalleryFragmentComponent.Factory): AndroidInjector.Factory<*>
+
+        @Binds
+        @IntoMap
+        @ClassKey(value = PhotosListFragment::class)
+        internal abstract fun bindPhotosListFragment(factory: PhotosListFragmentComponent.Factory): AndroidInjector.Factory<*>
+
+        @Binds
+        @IntoMap
+        @ClassKey(value = DetailsFragment::class)
+        internal abstract fun bindDetailsFragment(factory: DetailsFragmentComponent.Factory): AndroidInjector.Factory<*>
+    }
 
 
     @Module
@@ -64,7 +93,7 @@ interface MainActivityComponent : AndroidInjector<MainActivity> {
         @Provides
         @Named(MainNavigatorImpl.APP_NAV_NAVIGATOR)
         fun provideAppNavController(provider: AppNavProvider,
-                                 holder: ContextHolder
+                                    holder: ContextHolder
         ): Navigator {
             return AppNavComponentsNavigator(
                 provider.getNavController()
@@ -72,8 +101,9 @@ interface MainActivityComponent : AndroidInjector<MainActivity> {
         }
 
         @Provides
-        fun provideNavigator(@Named(MainNavigatorImpl.APP_NAVIGATOR) navigator: Navigator): MainNavigator =
-                MainNavigatorImpl(navigator)
+        fun provideNavigator(@Named(MainNavigatorImpl.APP_NAVIGATOR) navigator: Navigator,
+                             @Named(APP_NAV_NAVIGATOR) appNavigator: Navigator): MainNavigator =
+                MainNavigatorImpl(navigator, appNavigator)
     }
 
     @Module(

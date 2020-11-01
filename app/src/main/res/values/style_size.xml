@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Text.HeadLineH1">
+        <item name="android:textSize">@dimen/text_size_headline_h1</item>
+        <item name="android:lineSpacingExtra">@dimen/text_line_spacing_headline_h1</item>
+    </style>
+
+    <style name="Text.HeadLineH2">
+        <item name="android:textSize">@dimen/text_size_headline_h2</item>
+        <item name="android:lineSpacingExtra">@dimen/text_line_spacing_headline_h2</item>
+    </style>
+
+    <style name="Text.HeadLineH3">
+        <item name="android:textSize">@dimen/text_size_headline_h3</item>
+        <item name="android:lineSpacingExtra">@dimen/text_line_spacing_headline_h3</item>
+    </style>
+
+    <style name="Text.HeadLineH4">
+        <item name="android:textSize">@dimen/text_size_headline_h4</item>
+        <item name="android:lineSpacingExtra">@dimen/text_line_spacing_headline_h4</item>
+    </style>
+
+    <style name="Text.Medium">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:lineSpacingExtra">@dimen/text_line_spacing_medium</item>
+    </style>
+
+    <style name="Text.Common">
+        <item name="android:textSize">@dimen/text_size_common</item>
+        <item name="android:lineSpacingExtra">@dimen/text_line_spacing_common</item>
+    </style>
+
+    <style name="Text.Small">
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:lineSpacingExtra">@dimen/text_line_spacing_small</item>
+    </style>
+
+    <style name="Text.Tiny">
+        <item name="android:textSize">@dimen/text_size_tiny</item>
+        <item name="android:lineSpacingExtra">@dimen/text_line_spacing_tiny</item>
+    </style>
+
+    <style name="Text.SuperTiny">
+        <item name="android:textSize">@dimen/text_size_super_tiny</item>
+    </style>
+
+</resources>

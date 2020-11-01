@@ -22,14 +22,11 @@ android {
     }
 
     buildTypes {
-        release {
+        all {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-        debug {
-            minifyEnabled false
-            applicationIdSuffix ".debug"
-            versionNameSuffix "-debug"
+
+            buildConfigField "String", "HOST", '"https://jsonplaceholder.typicode.com"'
         }
     }
     compileOptions {
@@ -38,6 +35,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    dataBinding {
+        enabled = true
     }
 }
 

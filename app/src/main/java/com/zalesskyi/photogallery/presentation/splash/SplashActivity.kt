@@ -1,7 +1,7 @@
 package com.zalesskyi.photogallery.presentation.splash
 
 import com.zalesskyi.photogallery.R
-import com.zalesskyi.photogallery.presentation.BaseActivity
+import com.zalesskyi.photogallery.presentation.base.BaseActivity
 import javax.inject.Inject
 
 class SplashActivity : BaseActivity<SplashViewModel>() {

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="base_zero">0dp</dimen>
+    <dimen name="base_2dp">2dp</dimen>
+    <dimen name="base_4dp">4dp</dimen>
+    <dimen name="base_6dp">6dp</dimen>
+    <dimen name="base_8dp">8dp</dimen>
+    <dimen name="base_12dp">12dp</dimen>
+    <dimen name="base_16dp">16dp</dimen>
+    <dimen name="base_24dp">24dp</dimen>
+    <dimen name="base_32dp">32dp</dimen>
+    <dimen name="base_36dp">36dp</dimen>
+    <dimen name="base_48dp">48dp</dimen>
+    <dimen name="base_56dp">56dp</dimen>
+    <dimen name="base_64dp">64dp</dimen>
+    <dimen name="base_84dp">84dp</dimen>
+    <dimen name="base_92dp">92dp</dimen>
+
+    <!--text size-->
+    <dimen name="text_size_headline_h1">34sp</dimen>
+    <dimen name="text_size_headline_h2">28sp</dimen>
+    <dimen name="text_size_headline_h3">22sp</dimen>
+    <dimen name="text_size_headline_h4">20sp</dimen>
+    <dimen name="text_size_medium">17sp</dimen>
+    <dimen name="text_size_common">16sp</dimen>
+    <dimen name="text_size_normal">15sp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_tiny">12sp</dimen>
+    <dimen name="text_size_super_tiny">10sp</dimen>
+
+
+    <dimen name="text_line_spacing_headline_h1">11sp</dimen>
+    <dimen name="text_line_spacing_headline_h2">9sp</dimen>
+    <dimen name="text_line_spacing_headline_h3">7sp</dimen>
+    <dimen name="text_line_spacing_headline_h4">7sp</dimen>
+    <dimen name="text_line_spacing_medium">6sp</dimen>
+    <dimen name="text_line_spacing_common">5sp</dimen>
+    <dimen name="text_line_spacing_normal">0sp</dimen>
+    <dimen name="text_line_spacing_small">5sp</dimen>
+    <dimen name="text_line_spacing_tiny">4sp</dimen>
+    <dimen name="text_size_super_super_tiny">0sp</dimen>
+
+</resources>
