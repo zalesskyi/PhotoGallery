@@ -13,11 +13,15 @@ import kotlinx.coroutines.launch
 interface BaseViewModel {
 
     val progressLiveData: LiveData<ProgressEvent>
+
+    val errorLiveData: LiveData<Throwable>
 }
 
 open class BaseViewModelImpl : ViewModel(), BaseViewModel {
 
     override val progressLiveData = SingleLiveEvent<ProgressEvent>()
+
+    override val errorLiveData = SingleLiveEvent<Throwable>()
 
     fun <T, R, U : UseCaseCoroutine<T, R>>U.launch(param: R, block: CompletionBlock<T>) {
         viewModelScope.launch { execute(param, block) }

@@ -35,6 +35,14 @@ constructor(private val getPhotosUseCase: GetPhotosUseCase) : BaseViewModelImpl(
             onCancel = {
                 hideProgress()
             }
+            onCancel = {
+                hideProgress()
+                errorLiveData.value = it
+            }
+            onError = {
+                hideProgress()
+                errorLiveData.value = it
+            }
             onComplete = {
                 photosLiveData.run {
                     value?.put(albumId, it)

@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
 import androidx.lifecycle.observe
+import com.zalesskyi.domain.models.Album
 import com.zalesskyi.photogallery.R
+import com.zalesskyi.photogallery.extensions.gone
 import com.zalesskyi.photogallery.extensions.skeleton
+import com.zalesskyi.photogallery.extensions.visible
 import com.zalesskyi.photogallery.presentation.base.BaseFragment
 import com.zalesskyi.photogallery.presentation.main.MainNavigator
 import kotlinx.android.synthetic.main.fragment_gallery.*
@@ -28,7 +31,11 @@ class GalleryFragment : BaseFragment<GalleryViewModel>() {
 
     override fun observeViewModel() {
         viewModel.run {
-            albumsLiveData.observe(viewLifecycleOwner, adapter::updateAllNotify)
+            albumsLiveData.observe(viewLifecycleOwner, ::onArrived)
+            errorLiveData.observe(viewLifecycleOwner) {
+                lawErrorGallery.visible()
+                rvAlbums.gone()
+            }
         }
     }
 
@@ -41,5 +48,11 @@ class GalleryFragment : BaseFragment<GalleryViewModel>() {
         super.onViewCreated(view, savedInstanceState)
         rvAlbums.adapter = adapter
         viewModel.getAlbums()
+    }
+
+    private fun onArrived(data: List<Album>) {
+        lawErrorGallery.gone()
+        rvAlbums.visible()
+        adapter.updateAllNotify(data)
     }
 }
