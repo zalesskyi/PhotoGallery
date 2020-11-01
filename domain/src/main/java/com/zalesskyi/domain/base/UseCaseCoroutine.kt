@@ -1,14 +1,12 @@
 package com.zalesskyi.domain.base
 
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import kotlin.coroutines.CoroutineContext
 
 typealias CompletionBlock<T> = UseCaseCoroutine.Request<T>.() -> Unit
 
-abstract class UseCaseCoroutine<T, in Params>(
-    private val executionContext: CoroutineContext
-) {
+abstract class UseCaseCoroutine<T, in Params>() {
 
     protected abstract suspend fun executeOnBackground(params: Params): T
 
@@ -17,7 +15,7 @@ abstract class UseCaseCoroutine<T, in Params>(
         val response = Request<T>().apply(block).also { it.onStart?.invoke() }
 
         try {
-            val result = withContext(executionContext) {
+            val result = withContext(Dispatchers.IO) {
                 executeOnBackground(params)
             }
             response.onComplete(result)

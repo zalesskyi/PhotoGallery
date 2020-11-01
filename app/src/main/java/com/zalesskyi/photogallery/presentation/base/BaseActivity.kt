@@ -1,4 +1,4 @@
-package com.zalesskyi.photogallery.presentation
+package com.zalesskyi.photogallery.presentation.base
 
 import android.os.Bundle
 import android.widget.PopupWindow

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.zalesskyi.photogallery.extensions.AppSkeletonItem" />
+    </data>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/skeleton"
+        android:layout_width="175dp"
+        android:layout_height="175dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/bg_greyicon_rounded_16"
+        app:shimmer_auto_start="true">
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="75dp"
+            android:background="@drawable/bg_greytext_rounded_8" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+</layout>

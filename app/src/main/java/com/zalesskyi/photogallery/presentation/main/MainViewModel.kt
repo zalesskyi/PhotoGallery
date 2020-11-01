@@ -1,11 +1,46 @@
 package com.zalesskyi.photogallery.presentation.main
 
-import com.zalesskyi.photogallery.presentation.BaseViewModel
-import com.zalesskyi.photogallery.presentation.BaseViewModelImpl
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.zalesskyi.domain.models.Photo
+import com.zalesskyi.domain.usecases.GetPhotosUseCase
+import com.zalesskyi.photogallery.extensions.notifyObserver
+import com.zalesskyi.photogallery.presentation.base.BaseViewModel
+import com.zalesskyi.photogallery.presentation.base.BaseViewModelImpl
 import javax.inject.Inject
 
-interface MainViewModel : BaseViewModel
+interface MainViewModel : BaseViewModel {
+
+    /**
+     * Photos for each loaded album.
+     * Key - album id;
+     * Value - photos of this album.
+     */
+    val photosLiveData: LiveData<MutableMap<Int, List<Photo>>>
+
+    fun getPhotos(albumId: Int)
+}
 
 class MainViewModelImpl
 @Inject
-constructor() : BaseViewModelImpl(), MainViewModel
+constructor(private val getPhotosUseCase: GetPhotosUseCase) : BaseViewModelImpl(), MainViewModel {
+
+    override val photosLiveData = MutableLiveData(mutableMapOf<Int, List<Photo>>())
+
+    override fun getPhotos(albumId: Int) {
+        getPhotosUseCase.launch(albumId) {
+            onStart = {
+                showProgress()
+            }
+            onCancel = {
+                hideProgress()
+            }
+            onComplete = {
+                photosLiveData.run {
+                    value?.put(albumId, it)
+                    notifyObserver()
+                }
+            }
+        }
+    }
+}
