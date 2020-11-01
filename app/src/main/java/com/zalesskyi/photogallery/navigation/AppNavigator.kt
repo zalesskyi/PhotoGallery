@@ -1,5 +1,6 @@
 package com.zalesskyi.photogallery.navigation
 
+import androidx.navigation.fragment.FragmentNavigator
 import com.zalesskyi.photogallery.android.system.ContextHolder
 import com.zalesskyi.photogallery.presentation.main.MainActivity
 import javax.inject.Inject
@@ -8,7 +9,7 @@ class AppNavigator @Inject constructor(
     private val contextHolder: ContextHolder
 ) : Navigator {
 
-    override fun navigate(command: NavigationCommand) = Unit
+    override fun navigate(command: NavigationCommand, extras: FragmentNavigator.Extras?) = Unit
 
     override fun navigate(direction: NavDirections, args: Map<*, *>?) {
         realNavigation(direction, args)

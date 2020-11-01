@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/clRoot"
-    android:background="@color/purple_700">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/clRoot">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lawSplash"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/splash_lottie"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.zalesskyi.photogallery.navigation
 
 import androidx.navigation.NavController
+import androidx.navigation.fragment.FragmentNavigator
 
 class AppNavComponentsNavigator(
     private val navController: NavController,
@@ -8,13 +9,14 @@ class AppNavComponentsNavigator(
 
 ) : Navigator {
 
-    override fun navigate(command: NavigationCommand) {
-        realNavigation(command)
+    override fun navigate(command: NavigationCommand, extras: FragmentNavigator.Extras?) {
+        realNavigation(command, extras)
     }
 
     override fun navigate(direction: NavDirections, args: Map<*, *>?) = Unit
 
-    private fun realNavigation(command: NavigationCommand) {
+    private fun realNavigation(command: NavigationCommand,
+                               extras: FragmentNavigator.Extras?) {
         when (command) {
             is NavigationCommand.Back,
             is NavigationCommand.BackTo,
@@ -27,7 +29,9 @@ class AppNavComponentsNavigator(
             }
             is NavigationCommand.ToDirections -> {
                 if (hasCurrentDestinationDirection(command.directions.actionId)) {
-                    navController.navigate(command.directions)
+                    extras?.let {
+                        navController.navigate(command.directions, it)
+                    } ?: navController.navigate(command.directions)
                 }
             }
             is NavigationCommand.ToNewRoot -> {

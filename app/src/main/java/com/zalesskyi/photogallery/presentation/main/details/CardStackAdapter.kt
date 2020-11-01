@@ -43,8 +43,8 @@ class CardStackAdapter(list: List<Photo>) : RecyclerView.Adapter<CardStackAdapte
                     false))
         }
 
-        fun bind(album: Photo) {
-            binding.item = album
+        fun bind(photo: Photo) {
+            binding.item = photo
         }
     }
 }
