@@ -1,6 +1,5 @@
 package com.zalesskyi.photogallery.navigation
 
-object NavDirections {
-
-
+enum class NavDirections {
+    SPLASH_TO_MAIN
 }

@@ -1,8 +1,7 @@
 package com.zalesskyi.photogallery.navigation
 
-import com.stromee.navigation.screen.ActivityRequestScreen
-import com.stromee.navigation.screen.AppScreen
 import com.zalesskyi.photogallery.android.system.ContextHolder
+import com.zalesskyi.photogallery.presentation.main.MainActivity
 import javax.inject.Inject
 
 class AppNavigator @Inject constructor(
@@ -11,34 +10,16 @@ class AppNavigator @Inject constructor(
 
     override fun navigate(command: NavigationCommand) = Unit
 
-    override fun navigate(screen: AppScreen) {
-        realNavigation(screen)
-    }
-
-    private fun realNavigation(screen: AppScreen) {
-        when (screen) {
-            is ActivityRequestScreen -> {
-                contextHolder.getContext()?.run {
-                    startActivityForResult(
-                        screen.getActivityIntent(this), screen.requestCode
-                    )
-                }
-            }
-            else -> Unit
-        }
-    }
-
-    override fun navigate(direction: String, args: Map<*, *>?) {
+    override fun navigate(direction: NavDirections, args: Map<*, *>?) {
         realNavigation(direction, args)
     }
 
-    private fun realNavigation(direction: String, args: Map<*, *>?) {
+    private fun realNavigation(direction: NavDirections, args: Map<*, *>?) {
         contextHolder.getContext()?.let { context ->
-            /*val intent = when (direction) {
-
-                else -> throw NotImplementedError()
+            val intent = when (direction) {
+                NavDirections.SPLASH_TO_MAIN -> MainActivity.getIntent(context)
             }
-            context.startActivity(intent)*/
+            context.startActivity(intent)
         }
     }
 }
