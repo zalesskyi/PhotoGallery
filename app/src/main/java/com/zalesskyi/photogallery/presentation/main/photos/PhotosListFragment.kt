@@ -5,8 +5,11 @@ import android.os.Parcelable
 import android.view.View
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
+import com.zalesskyi.domain.models.Photo
 import com.zalesskyi.photogallery.R
+import com.zalesskyi.photogallery.extensions.gone
 import com.zalesskyi.photogallery.extensions.skeleton
+import com.zalesskyi.photogallery.extensions.visible
 import com.zalesskyi.photogallery.presentation.base.BaseFragment
 import com.zalesskyi.photogallery.presentation.base.progress.ProgressEvent
 import com.zalesskyi.photogallery.presentation.main.MainNavigator
@@ -39,13 +42,17 @@ class PhotosListFragment : BaseFragment<PhotosListViewModel>() {
     override fun observeViewModel() {
         mainViewModel.run {
             photosLiveData.observe(viewLifecycleOwner) { gallery ->
-                gallery[args.albumId]?.let(adapter::updateAllNotify)
+                gallery[args.albumId]?.let(::onArrived)
             }
             mainViewModel.progressLiveData.observe(viewLifecycleOwner) {
                 when (it) {
                     ProgressEvent.Show -> showProgress()
                     ProgressEvent.Hide -> hideProgress()
                 }
+            }
+            mainViewModel.errorLiveData.observe(viewLifecycleOwner) {
+                lawError.visible()
+                rvPhotos.gone()
             }
         }
     }
@@ -59,5 +66,11 @@ class PhotosListFragment : BaseFragment<PhotosListViewModel>() {
         super.onViewCreated(view, savedInstanceState)
         rvPhotos.adapter = adapter
         mainViewModel.getPhotos(args.albumId)
+    }
+
+    private fun onArrived(data: List<Photo>) {
+        lawError.gone()
+        rvPhotos.visible()
+        adapter.updateAllNotify(data)
     }
 }

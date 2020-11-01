@@ -28,6 +28,11 @@ constructor(private val getAlbumsUseCase: GetAlbumsUseCase) : BaseViewModelImpl(
             }
             onCancel = {
                 hideProgress()
+                errorLiveData.value = it
+            }
+            onError = {
+                hideProgress()
+                errorLiveData.value = it
             }
             onComplete = {
                 hideProgress()

@@ -35,7 +35,7 @@
         android:id="@+id/detailsFragment"
         android:name="com.zalesskyi.photogallery.presentation.main.details.DetailsFragment"
         android:label="DetailsFragment"
-        tools:layout="@layout/fragment_photos">
+        tools:layout="@layout/fragment_details">
 
         <argument
             android:name="albumId"
