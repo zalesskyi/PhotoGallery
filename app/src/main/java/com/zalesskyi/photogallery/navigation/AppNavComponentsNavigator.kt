@@ -1,7 +1,6 @@
 package com.zalesskyi.photogallery.navigation
 
 import androidx.navigation.NavController
-import com.stromee.navigation.screen.AppScreen
 
 class AppNavComponentsNavigator(
     private val navController: NavController,
@@ -12,6 +11,8 @@ class AppNavComponentsNavigator(
     override fun navigate(command: NavigationCommand) {
         realNavigation(command)
     }
+
+    override fun navigate(direction: NavDirections, args: Map<*, *>?) = Unit
 
     private fun realNavigation(command: NavigationCommand) {
         when (command) {
@@ -40,13 +41,5 @@ class AppNavComponentsNavigator(
 
     private fun hasCurrentDestinationDirection(actionId: Int): Boolean {
         return navController.currentDestination?.getAction(actionId) != null
-    }
-
-    override fun navigate(direction: String, args: Map<*, *>?) {
-        throw NotImplementedError()
-    }
-
-    override fun navigate(screen: AppScreen) {
-        throw NotImplementedError()
     }
 }

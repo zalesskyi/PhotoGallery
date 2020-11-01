@@ -1,6 +1,7 @@
 package com.zalesskyi.photogallery.presentation.main
 
-import android.os.Bundle
+import android.content.Context
+import android.content.Intent
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.zalesskyi.photogallery.R
@@ -9,9 +10,10 @@ import com.zalesskyi.photogallery.presentation.BaseActivity
 
 class MainActivity : BaseActivity<MainViewModel>(), AppNavProvider {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    companion object {
+
+        fun getIntent(context: Context) =
+                Intent(context, MainActivity::class.java)
     }
 
     override val layoutResId = R.layout.activity_main
