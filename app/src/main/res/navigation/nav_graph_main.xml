@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/galleryFragment"
+    android:id="@+id/nav_graph_main">
+
+    <fragment
+        android:id="@+id/galleryFragment"
+        android:name="com.zalesskyi.photogallery.presentation.main.gallery.GalleryFragment"
+        android:label="GalleryFragment"
+        tools:layout="@layout/fragment_gallery">
+
+        <action
+            android:id="@+id/action_galleryFragment_to_photosFragment"
+            app:destination="@id/photosFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/photosFragment"
+        android:name="com.zalesskyi.photogallery.presentation.main.photos.PhotosListFragment"
+        android:label="PhotosFragment"
+        tools:layout="@layout/fragment_photos">
+
+        <argument
+            android:name="albumId"
+            app:argType="integer"/>
+
+        <action
+            android:id="@+id/action_photosFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.zalesskyi.photogallery.presentation.main.details.DetailsFragment"
+        android:label="DetailsFragment"
+        tools:layout="@layout/fragment_details">
+
+        <argument
+            android:name="albumId"
+            app:argType="integer"/>
+
+        <argument
+            android:name="photoUrl"
+            app:argType="string"/>
+    </fragment>
+</navigation>

@@ -1,26 +1,32 @@
-plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-}
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'androidx.navigation.safeargs'
+apply from: "$project.rootDir/buildsystem/dependencies.gradle"
 
 android {
+
+    def globalConfig = rootProject.ext
+
     compileSdkVersion 30
     buildToolsVersion "30.0.1"
 
     defaultConfig {
         applicationId "com.zalesskyi.photogallery"
-        minSdkVersion 21
-        targetSdkVersion 30
+        minSdkVersion globalConfig.androidMinSdkVersion
+        targetSdkVersion globalConfig.androidTargetSdkVersion
+        compileSdkVersion globalConfig.androidCompileSdkVersion
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
-        release {
+        all {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            buildConfigField "String", "HOST", '"https://jsonplaceholder.typicode.com"'
         }
     }
     compileOptions {
@@ -30,16 +36,18 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    dataBinding {
+        enabled = true
+    }
+}
+
+kotlin {
+    androidExtensions {
+        experimental = true
+    }
 }
 
 dependencies {
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.2.0'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    presentationDependencies()
 }
